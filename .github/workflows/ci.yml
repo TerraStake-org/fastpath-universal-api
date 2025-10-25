@@ -1,0 +1,14 @@
+name: ci
+on: [push, pull_request]
+jobs:
+build:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v4
+- uses: actions/setup-node@v4
+with: { node-version: '20' }
+- run: npm i -g pnpm && pnpm i
+- run: pnpm hardhat compile
+- uses: foundry-rs/foundry-toolchain@v1
+with: { version: nightly }
+- run: forge test -vv

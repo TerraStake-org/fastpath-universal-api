@@ -26,6 +26,9 @@ contract FastPathVRFVerifier is
         0xc0bf4602062643725c8ada560c71ab6a897bc17abf0ee1d76cd85ab681aafa6e;
     uint256 public constant MIN_CONFIRMATIONS = 6;
     uint256 public constant MAX_VERIFICATIONS = 10_000;
+    
+    // Domain separator with contract + chain binding
+    bytes32 public constant DOMAIN = keccak256("FastPathV1:verify");
 
     // ============ State Variables (Upgradeable Keys) ============
     bytes32 public fastPathVRFKey = 0x2909f6f6dfa87a14cdf85783f8ec09148e08bd89036ee0f54ef9b1ff3ebae43b;
@@ -72,6 +75,7 @@ contract FastPathVRFVerifier is
     error UTXONotInCanonicalPool(bytes32 txid);
     error ZeroRequestID();
     error InvalidAttestation();
+    error InvalidVout(); // New error for vout validation
 
     // ============ Initialization ============
     constructor() {
@@ -90,6 +94,7 @@ contract FastPathVRFVerifier is
     }
 
     function _initializeKnownUTXOs() private {
+        // All UTXOs have vout = 0 in the canonical pool
         knownUTXOs[0xf4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16] = true;
         knownUTXOs[0x0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9] = true;
         knownUTXOs[0xa1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d] = true;
@@ -142,6 +147,11 @@ contract FastPathVRFVerifier is
         }
         require(anchor.value > 0, "Zero BTC value");
         require(anchor.blockHeight > 0, "Invalid block height");
+        
+        // Validate vout is 0 for all canonical UTXOs
+        if (anchor.vout != 0) {
+            revert InvalidVout();
+        }
     }
 
     function _verifyIPFSManifest(
@@ -168,17 +178,17 @@ contract FastPathVRFVerifier is
 
     // ============ ECDSA Attestation ============
     function _verifyAttestation(VerificationBundle calldata b) private view {
-        // Domain tag to avoid cross-protocol replay
-        bytes32 domain = keccak256("FastPathV1:verify");
-
-        // Bind exactly what your backend verified off-chain
+        // Enhanced digest with vout + contract + chain binding
         bytes32 digest = keccak256(
             abi.encode(
-                domain,
+                DOMAIN,
+                address(this),                    // Bind to this verifier
+                block.chainid,                    // Bind to chain
                 b.requestId,
                 b.ipfsManifest.merkleRoot,
                 keccak256(bytes(b.ipfsManifest.cidString)),
-                b.bitcoinAnchor.txid,
+                b.bitcoinAnchor.txid,             // big-endian
+                b.bitcoinAnchor.vout,             // << Added vout
                 b.bitcoinAnchor.blockHeight,
                 b.bitcoinAnchor.spentAtBlock,
                 b.bitcoinAnchor.value,

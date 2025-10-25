@@ -1,0 +1,211 @@
+# ===============================================
+# FastPath Universal API - Production .gitignore
+# ===============================================
+
+# 🚨 SECURITY & SECRETS (Never commit these!)
+# ================================================
+.env
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+.secret
+.secret.*
+keys/
+keystore/
+secrets/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.privkey
+privkey.pem
+fullchain.pem
+
+# 🔧 NODE & PACKAGE MANAGERS
+# ================================================
+node_modules/
+.npm/
+.pnpm-store/
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# 📦 HARDHAT & FOUNDRY
+# ================================================
+# Hardhat
+artifacts/
+cache/
+typechain/
+typechain-types/
+coverage/
+coverage.json
+generated/
+
+# Foundry  
+out/
+cache/
+broadcast/
+!broadcast/**/run-latest.json  # Keep latest deployment for verification
+
+# OpenZeppelin Upgrades
+.openzeppelin/
+!.openzeppelin/*.json           # Keep network manifests, exclude temp files
+
+# 🧪 TESTING & COVERAGE
+# ================================================
+.coverage/
+lcov.info
+.nyc_output/
+*.lcov
+test-results/
+junit.xml
+coverage/
+
+# 📊 REPORTS & ANALYTICS
+# ================================================
+*.report
+*.stats
+profiler-output/
+flamegraph.html
+perf.data
+
+# 🏗️ BUILD OUTPUTS & DISTRIBUTION
+# ================================================
+dist/
+build/
+*.tgz
+*.tar.gz
+*.zip
+pkg/
+bin/
+
+# 📝 DOCUMENTATION BUILDS
+# ================================================
+_site/
+.sass-cache/
+.jekyll-cache/
+docs/_build/
+docs/site/
+
+# 🔍 DEBUG & DEVELOPMENT
+# ================================================
+*.log
+logs/
+debug/
+*.pid
+*.seed
+*.pid.lock
+.dccache/
+
+# 💻 IDE & EDITOR
+# ================================================
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*#*
+.#*
+\#*#
+
+# 🖥️ OPERATING SYSTEM
+# ================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.cab
+*.tmp
+
+# Linux
+.directory
+*~
+
+# 🐳 DOCKER & CONTAINERS
+# ================================================
+.docker/
+docker-compose.override.yml
+.dockerignore
+
+# 📦 DEPLOYMENT & CI/CD
+# ================================================
+.vercel/
+.netlify/
+.gh-pages/
+.parcel-cache/
+.next/
+.nuxt/
+
+# 🎯 FASTPATH-SPECIFIC
+# ================================================
+# Attestation keys (should be in env, but just in case)
+attestation-keys/
+vrf-keys/
+# Generated proof bundles (temporary)
+proof-bundles/
+# IPFS cache
+.ipfs-cache/
+# Universal RPC cache
+.rpc-cache/
+
+# ⚠️ TEMPORARY & BACKUP FILES
+# ================================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+*_backup
+*.sav
+
+# 🎪 MISC
+# ================================================
+*.tgz
+*.tar.gz
+*.zip
+.cache/
+.parcel-cache/
+.rpt2_cache/
+.eslintcache
+.stylelintcache
+
+# 🚀 KEEP THESE (Examples & Templates)
+# ================================================
+!.env.example
+!.vscode/settings.json.example
+!broadcast/**/run-latest.json
+!.openzeppelin/*.json

@@ -6,13 +6,13 @@ import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "./interfaces/IFastPathVerification.sol";
-import "./SyntheticBTC.sol";
-import "./libraries/BitcoinDepositLib.sol";
-import "./libraries/RedemptionLib.sol";
+import "../interfaces/IFastPathVerification.sol";
+import "../SyntheticBTC.sol";
+import "../libraries/BitcoinDepositLib.sol";
+import "../libraries/RedemptionLib.sol";
 
 /**
- * @title BitcoinDeFi - Optimized for size
+ * @title BitcoinDeFi
  * @notice Bridge Bitcoin to Ethereum via VRF proofs
  */
 contract BitcoinDeFi is 
@@ -152,3 +152,4 @@ contract BitcoinDeFi is
     function unpause() external onlyOwner { _unpause(); }
     function _authorizeUpgrade(address) internal override onlyOwner {}
 }
+

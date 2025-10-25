@@ -49,6 +49,9 @@ The fixed pool approach provides:
 
 *These UTXOs aren't just data points - they're pieces of Bitcoin's story, now preserved as trust anchors for cross-chain verification.*
 
+"We speak Bitcoin in Ethereum. Your dApp talks to Bitcoin exactly like it talks to Ethereum - same calls, same tools, same developers. 
+No multisig risks, no wrapped token compromises - just pure cryptographic verification with a unified interface."
+
 ## 🛠️ Development Setup
 
 ### Prerequisites
@@ -72,4 +75,5 @@ npx hardhat compile
 
 # Run tests
 forge test -vv
+
 

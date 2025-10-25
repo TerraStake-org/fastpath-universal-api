@@ -1,0 +1,87 @@
+{
+  "name": "fastpath-universal-api",
+  "version": "0.1.0",
+  "description": "Universal RPC interface for cross-chain communication. Bitcoin → Ethereum bridge with VRF proofs instead of multisig.",
+  "keywords": [
+    "bitcoin",
+    "ethereum",
+    "bridge",
+    "vrf",
+    "solidity",
+    "defi",
+    "cross-chain",
+    "rpc",
+    "universal-api"
+  ],
+  "homepage": "https://github.com/TerraStake-org/fastpath-universal-api",
+  "bugs": {
+    "url": "https://github.com/TerraStake-org/fastpath-universal-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TerraStake-org/fastpath-universal-api.git"
+  },
+  "license": "MIT",
+  "author": "TerraStake-org <contact@terrastake.org>",
+  "type": "module",
+  "scripts": {
+    "//": "=== DEVELOPMENT ===",
+    "compile": "hardhat compile",
+    "test": "forge test",
+    "test:verbose": "forge test -vvv",
+    "test:gas": "forge test --gas-report",
+    "test:coverage": "hardhat coverage",
+    
+    "//": "=== SECURITY & ANALYSIS ===",
+    "security": "slither . --exclude-informational",
+    "lint": "solhint 'contracts/**/*.sol'",
+    "lint:fix": "solhint 'contracts/**/*.sol' --fix",
+    "analyze": "myth analyze contracts/",
+    
+    "//": "=== DEPLOYMENT ===",
+    "deploy:sepolia": "hardhat run scripts/deploy/01_deploy_verifier.ts --network sepolia",
+    "deploy:mainnet": "hardhat run scripts/deploy/01_deploy_verifier.ts --network mainnet",
+    "verify:sepolia": "hardhat verify --network sepolia",
+    "verify:mainnet": "hardhat verify --network mainnet",
+    
+    "//": "=== OPERATIONS ===",
+    "ops:set-attestor": "hardhat run scripts/ops/set-attestor.ts --network sepolia",
+    "ops:set-fee": "hardhat run scripts/ops/set-fee-and-limits.ts --network sepolia",
+    "ops:upgrade": "hardhat run scripts/ops/upgrade-verifier.ts --network sepolia",
+    
+    "//": "=== BUILD & QUALITY ===",
+    "build": "npm run compile && npm run test",
+    "clean": "hardhat clean && forge clean",
+    "format": "prettier --write '**/*.{json,md,yml,ts,js}'",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@openzeppelin/hardhat-upgrades": "^3.0.0",
+    "@typechain/ethers-v6": "^0.5.0",
+    "@typechain/hardhat": "^9.0.0",
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.3.0",
+    "hardhat": "^2.19.0",
+    "hardhat-gas-reporter": "^1.0.9",
+    "prettier": "^3.0.0",
+    "prettier-plugin-solidity": "^1.2.0",
+    "solhint": "^4.0.0",
+    "typechain": "^8.3.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts-upgradeable": "^5.0.0",
+    "@openzeppelin/contracts": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@8.0.0",
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/TerraStake-org"
+  }
+}

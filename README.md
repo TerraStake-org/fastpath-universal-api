@@ -12,7 +12,9 @@
 | **Tests** | ✅ Basic coverage | Foundry tests passing |
 | **Deployment Scripts** | 🚧 Scaffolded | Need environment setup |
 | **Universal RPC** | 🔮 Ready and tested, will be updated | Bitcoin JSON-RPC → Ethereum translation |
-$Verification offline demo/https://terrastake-org.github.io/proof-bundle-verifier-/proof-bundle-verifier.html/signatures are done via our VRF generator.
+| **Verification Demo** | ✅ Live | [Proof Bundle Verifier](https://terrastake-org.github.io/proof-bundle-verifier-/proof-bundle-verifier.html) |
+
+*Signatures are done via our VRF generator*
 
 ## 🛠️ Development Setup
 
@@ -23,7 +25,10 @@ npm install -g hardhat
 
 # Foundry (for tests)
 curl -L https://foundry.paradigm.xyz | bash
-foundryupgit clone https://github.com/TerraStake-org/fastpath-universal-api
+foundryup
+
+Quick Start
+git clone https://github.com/TerraStake-org/fastpath-universal-api
 cd fastpath-universal-api
 
 # Install dependencies
